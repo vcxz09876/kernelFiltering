@@ -21,6 +21,9 @@
     <ClInclude Include="targetver.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="LinkingTest.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -30,6 +33,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="dllmain.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkingTest.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

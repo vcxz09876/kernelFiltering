@@ -3,10 +3,21 @@
 
 #include "pch.h"
 #include <iostream>
+#include "LinkingTest.h"
 
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	// Initialize a Fibonacci relation sequence.
+	// Write out the sequence values until overflow.	fibonacci_init(1, 1);
+
+	do {
+		std::cout << fibonacci_index() << ": "
+			<< fibonacci_current() << std::endl;
+	} while (fibonacci_next());
+	// Report count of values written before overflow.
+	std::cout << fibonacci_index() + 1 <<
+		" Fibonacci sequence values fit in an " <<
+		"unsigned 64-bit integer." << std::endl;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
