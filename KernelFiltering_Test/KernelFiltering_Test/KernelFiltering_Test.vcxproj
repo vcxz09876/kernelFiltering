@@ -159,6 +159,8 @@
   <ItemGroup>
     <ClInclude Include="csvAsMatrix.h" />
     <ClInclude Include="include\rapidcsv\rapidcsv.h" />
+    <ClInclude Include="kernelCommon.h" />
+    <ClInclude Include="kernelGaussianLowPass.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="pngAs8bitMatrix.h" />
   </ItemGroup>
