@@ -13,13 +13,28 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Файлы заголовков\include">
+      <UniqueIdentifier>{94ec5a65-5490-49e3-9a52-ecc8e1a549e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\io">
+      <UniqueIdentifier>{f96ac333-7ea8-44f4-8e0b-5254ab9a7da3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\io">
+      <UniqueIdentifier>{3f7b5c65-f044-4e76-8f74-e930a76132c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="include\rapidcsv\rapidcsv.h">
+      <Filter>Файлы заголовков\include</Filter>
+    </ClInclude>
     <ClInclude Include="pngAs8bitMatrix.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\io</Filter>
+    </ClInclude>
+    <ClInclude Include="csvAsMatrix.h">
+      <Filter>Файлы заголовков\io</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -29,8 +44,14 @@
     <ClCompile Include="KernelFiltering_Test.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="csvAsMatrix.cpp">
+      <Filter>Исходные файлы\io</Filter>
+    </ClCompile>
     <ClCompile Include="pngAs8bitMatrix.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\io</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\lodepng.cpp">
+      <Filter>Исходные файлы\io</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
