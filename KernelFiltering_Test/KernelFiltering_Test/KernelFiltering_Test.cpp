@@ -13,25 +13,25 @@ using namespace boost::numeric::ublas;
 
 #include "pngAs8bitMatrix.h"
 
-void runLinkingTest() {
-	// Initialize a Fibonacci relation sequence.
-// Write out the sequence values until overflow.	fibonacci_init(1, 1);
-
-	do {
-		std::cout << fibonacci_index() << ": "
-			<< fibonacci_current() << std::endl;
-	} while (fibonacci_next());
-	// Report count of values written before overflow.
-	std::cout << fibonacci_index() + 1 <<
-		" Fibonacci sequence values fit in an " <<
-		"unsigned 64-bit integer." << std::endl;
-}
+//void runLinkingTest() {
+//	// Initialize a Fibonacci relation sequence.
+//// Write out the sequence values until overflow.	fibonacci_init(1, 1);
+//
+//	do {
+//		std::cout << fibonacci_index() << ": "
+//			<< fibonacci_current() << std::endl;
+//	} while (fibonacci_next());
+//	// Report count of values written before overflow.
+//	std::cout << fibonacci_index() + 1 <<
+//		" Fibonacci sequence values fit in an " <<
+//		"unsigned 64-bit integer." << std::endl;
+//}
 
 
 int main()
 {
-	matrix<uint8_t> image = readPNGRedAsMatrix("c:\\Users\\user1\\source\\repos\\test_png.png");
-	auto r = writePNGRedAsMatrix("c:\\Users\\user1\\source\\repos\\test_png2.png", &image);
+	matrix<uint8_t> image = readPNGRedAsMatrix("..\\..\\test_data\\subp_147_5-157_5.png");
+	auto r = writePNGRedAsMatrix("..\\..\\test_data\\_subp_147_5-157_5.png", &image);
 
 	return 0;
 }
