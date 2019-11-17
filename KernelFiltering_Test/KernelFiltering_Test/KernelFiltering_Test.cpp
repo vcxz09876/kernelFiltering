@@ -5,10 +5,17 @@
 #include <iostream>
 #include "LinkingTest.h"
 
-int main()
-{
+#include <array>
+#include "lodepng.h"
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/matrix_proxy.hpp>
+using namespace boost::numeric::ublas;
+
+#include "pngAs8bitMatrix.h"
+
+void runLinkingTest() {
 	// Initialize a Fibonacci relation sequence.
-	// Write out the sequence values until overflow.	fibonacci_init(1, 1);
+// Write out the sequence values until overflow.	fibonacci_init(1, 1);
 
 	do {
 		std::cout << fibonacci_index() << ": "
@@ -18,6 +25,15 @@ int main()
 	std::cout << fibonacci_index() + 1 <<
 		" Fibonacci sequence values fit in an " <<
 		"unsigned 64-bit integer." << std::endl;
+}
+
+
+int main()
+{
+	matrix<uint8_t> image = readPNGRedAsMatrix("c:\\Users\\user1\\source\\repos\\test_png.png");
+	auto r = writePNGRedAsMatrix("c:\\Users\\user1\\source\\repos\\test_png2.png", &image);
+
+	return 0;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
