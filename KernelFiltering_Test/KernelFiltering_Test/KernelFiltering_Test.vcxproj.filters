@@ -53,9 +53,6 @@
     <ClCompile Include="KernelFiltering_Test.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="csvAsMatrix.cpp">
-      <Filter>Исходные файлы\io</Filter>
-    </ClCompile>
     <ClCompile Include="pngAs8bitMatrix.cpp">
       <Filter>Исходные файлы\io</Filter>
     </ClCompile>

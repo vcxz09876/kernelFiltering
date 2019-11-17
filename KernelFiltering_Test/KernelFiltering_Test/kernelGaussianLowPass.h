@@ -1,5 +1,7 @@
 #include "pch.h"
 
+#include <limits>
+
 #include "kernelCommon.h"
 
 // Boost matrix
@@ -30,13 +32,39 @@ void printMatrix(const matrix<G> &m)
 
 
 template <class T, class G>
+G s2dGauss(T m, T n, G sigmaM, G sigmaN) {
+	const G pi = boost::math::constants::pi<G>();
+	G km = pow(m, 2.0) / (2 * pow(sigmaM, 2.0));
+	G kn = pow(n, 2.0) / (2 * pow(sigmaN, 2.0));
+	G result = exp(-1 * (km + kn)) / pi;  // TODO: 2*pi
+	return result;
+}
+
+template <class G>
+matrix<G> s2dGaussKernel(int radiusM, int radiusN, G sigmaM, G sigmaN)
+{
+	int actM = 1 + (radiusM * 2);
+	int actN = 1 + (radiusN * 2);
+	matrix<G> k(actM, actN);
+
+	for (int m = 0; m < actM; m++) {
+		for (int n = 0; n < actN; n++) {
+			k(m, n) = s2dGauss<int, G>(m - radiusM, n - radiusN, sigmaM, sigmaN);
+		}
+	}
+	return k;
+}
+
+
+template <class T, class G>
 G sGauss(T m, T n, G sigma) {
 	const G pi = boost::math::constants::pi<G>();
 	G k = 1 / (2 * pi *  pow(sigma, 2.0));
-	G e = exp(-1 * (pow((G)m, 2.0) + pow((G)n, 2.0)) / (2 * pow(sigma, 2.0)));
+	G e = exp(-1 * (pow(m, 2.0) + pow(n, 2.0)) / (2 * pow(sigma, 2.0)));
 	G result = k * e;
 	return result;
 }
+
 
 template <class G>
 matrix<G> sGaussKernel(int radiusM, int radiusN, G sigma)
@@ -47,7 +75,7 @@ matrix<G> sGaussKernel(int radiusM, int radiusN, G sigma)
 
 	for (int m = 0; m < actM; m++) {
 		for (int n = 0; n < actN; n++) {
-			k(m, n) = sGauss<int, G>(m - radiusM, n - radiusN, (G)sigma); // TODO: Could be optimized by vector multiplication
+			k(m, n) = sGauss<int, G>(m - radiusM, n - radiusN, sigma); // TODO: Could be optimized by vector multiplication
 		}
 	}
 	return k;
@@ -78,6 +106,29 @@ void applyLowPassGaussFilterToMatrix(
 )
 {
 	matrix<G> kernel = sGaussKernel<G>(radiusM, radiusN, sigma);
+	printMatrix<G>(kernel);
+
+	int startM = radiusM;
+	int endM = (x)->size1() - radiusM;
+	int startN = radiusN;
+	int endN = (x)->size2() - radiusN;
+	for (int m = startM; m < endM; m++)
+		for (int n = startN; n < endN; n++)
+		{
+			matrix_range<matrix<T>> frame = getFrame(x, m, n, radiusM, radiusN);
+			T value = calculateGLP<T, G>(&frame, &kernel);
+			(d)->operator()(m, n) = value;
+		}
+}
+
+
+template <class T, class G>
+void apply2dLowPassGaussFilterToMatrix(
+	matrix<T> * d, matrix<T> * x,
+	uint32_t radiusM, uint32_t radiusN, G sigmaM, G sigmaN
+)
+{
+	matrix<G> kernel = s2dGaussKernel<G>(radiusM, radiusN, sigmaM, sigmaN);
 	printMatrix<G>(kernel);
 
 	int startM = radiusM;

@@ -34,10 +34,13 @@ int main()
 {
 	matrix<uint8_t> inputImage = readPNGRedAsMatrix("..\\..\\test_data\\subp_147_5-157_5.png");
 
-	matrix<uint8_t> outputImage = matrix<uint8_t>(inputImage.size1(), inputImage.size2());
-	applyLowPassGaussFilterToMatrix<uint8_t, double>(&outputImage, &inputImage, 1, 1, 0.8);
+	matrix<uint8_t> outputImage1 = matrix<uint8_t>(inputImage.size1(), inputImage.size2());
+	applyLowPassGaussFilterToMatrix<uint8_t, double>(&outputImage1, &inputImage, 1, 1, 0.8);
+	auto r1 = writePNGRedAsMatrix("..\\..\\test_data\\_lp_1_1_08_subp_147_5-157_5.png", &outputImage1);
 
-	auto r = writePNGRedAsMatrix("..\\..\\test_data\\_subp_147_5-157_5.png", &outputImage);
+	matrix<uint8_t> outputImage2 = matrix<uint8_t>(inputImage.size1(), inputImage.size2());
+	apply2dLowPassGaussFilterToMatrix<uint8_t, double>(&outputImage2, &inputImage, 1, 3, 0.3, 1.0);
+	auto r2 = writePNGRedAsMatrix("..\\..\\test_data\\_2dlp_1_3_03_10_subp_147_5-157_5.png", &outputImage2);
 
 	return 0;
 }

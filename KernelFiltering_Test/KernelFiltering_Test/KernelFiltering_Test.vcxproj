@@ -165,7 +165,6 @@
     <ClInclude Include="pngAs8bitMatrix.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="csvAsMatrix.cpp" />
     <ClCompile Include="KernelFiltering_Test.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
